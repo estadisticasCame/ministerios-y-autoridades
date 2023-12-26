@@ -44,7 +44,6 @@ def pagina_gobierno_nacional():
     hojas_nacional = nombre_hojas[1:15]
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional)
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
-    st.write(opcion_seleccionada)
     data = hojas[opcion_seleccionada]
     st.dataframe(data)
 
@@ -67,6 +66,8 @@ with columna4:
     if st.button("GOBIERNOS PROVINCIALES", use_container_width=True):
         st.session_state.estado['seleccion_boton'] = "gobiernos_provinciales"
         st.session_state.estado['seleccion_desplegable'] = None
+
+st.write("---")
 
 # Mostrar la página correspondiente según el botón seleccionado
 if st.session_state.estado['seleccion_boton'] == "gobierno_nacional":
