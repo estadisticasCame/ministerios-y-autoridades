@@ -73,8 +73,6 @@ tucuman = hojas[nombre_hojas[38]]
 
 
 st.write("---")
-auxiliar_gobierno_nacional = False
-auxiliar_gobierno_provincial = False
 
 columna3, columna4 = st.columns(2)
 with columna3:
