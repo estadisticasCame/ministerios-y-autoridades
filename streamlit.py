@@ -86,6 +86,7 @@ def pagina_gobierno_nacional():
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     st.write(opcion_seleccionada)
     data = hojas[opcion_seleccionada]
+    data = data.to_html(index=False, escape = False)
     data = data.replace('<table border="1" class="dataframe">',
                                     '<table style="width: 100%; text-align: center;" border="1" class="dataframe">')
     data = data.replace('<th>', '<th style="text-align: center; background-color: blue; color: white;">')
