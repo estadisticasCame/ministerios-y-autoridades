@@ -86,13 +86,14 @@ def pagina_gobierno_nacional():
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional)
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     st.write(opcion_seleccionada)
+    st.dataframe(hojas[opcion_seleccionada])
 
 def pagina_gobiernos_provinciales():
     st.write("Contenido para Gobiernos Provinciales")
     hojas_provincial = nombre_hojas[15:]
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_provincial)
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
-    st.write(opcion_seleccionada)
+    st.dataframe(hojas[opcion_seleccionada])
 
 # Crear columnas
 columna3, columna4 = st.columns(2)
