@@ -16,19 +16,80 @@ def cargar_datos_excel():
     excel = pd.read_excel("Datos/Ministerios y autoridades.xlsx", sheet_name=None)
     # Almacenamos las hojas en un diccionario de Pandas
     hojas = {}
+    nombre_hojas = []
     for nombre_hoja, datos_hoja in excel.items():
         hojas[nombre_hoja] = datos_hoja
+        nombre_hojas.append(nombre_hoja)
+        try:
+            hojas[nombre_hoja].columns = hojas[nombre_hoja].iloc[0]
+            # Elimina la primera fila, ya que ahora son nombres de columnas
+            hojas[nombre_hoja] = hojas[nombre_hoja][1:]
+        except:
+            pass
+    return hojas,nombre_hojas
 
-    return hojas
+hojas, nombre_hojas = cargar_datos_excel()
 
-hojas = cargar_datos_excel()
+def gobierno_nacional():
+    # HOJAS GOBIERNO NACIONAL
+    presidencia_de_la_nacion = hojas[nombre_hojas[1]]
+    jefatura_gabinete = hojas[nombre_hojas[2]]
+    ministerio_defensa = hojas[nombre_hojas[3]]
+    ministerio_justicia = hojas[nombre_hojas[4]]
+    ministerio_seguridad = hojas[nombre_hojas[5]]
+    ministerio_interior = hojas[nombre_hojas[6]]
+    ministerio_salud = hojas[nombre_hojas[7]]
+    ministerio_relaciones_exteriores = hojas[nombre_hojas[8]]
+    ministerio_economia = hojas[nombre_hojas[9]]
+    ministerio_capital_humano = hojas[nombre_hojas[10]]
+    ministerio_infraestructura = hojas[nombre_hojas[11]]
+    diputados = hojas[nombre_hojas[12]]
+    senadores = hojas[nombre_hojas[13]]
+    gobernadores = hojas[nombre_hojas[14]]
+
+def gobiernos_provinciales():
+    # HOJAS GOBIERNO PROVINCIAL
+    buenos_aires = hojas[nombre_hojas[15]]
+    caba = hojas[nombre_hojas[16]]
+    catamarca = hojas[nombre_hojas[17]]
+    chaco = hojas[nombre_hojas[18]]
+    chubut = hojas[nombre_hojas[19]]
+    cordoba = hojas[nombre_hojas[20]]
+    corrientes = hojas[nombre_hojas[21]]
+    entrerios = hojas[nombre_hojas[22]]
+    formosa = hojas[nombre_hojas[23]]
+    jujuy = hojas[nombre_hojas[24]]
+    lapampa = hojas[nombre_hojas[25]]
+    larioja = hojas[nombre_hojas[26]]
+    mendoza = hojas[nombre_hojas[27]]
+    misiones = hojas[nombre_hojas[28]]
+    neuquen = hojas[nombre_hojas[29]]
+    rionegro = hojas[nombre_hojas[30]]
+    salta = hojas[nombre_hojas[31]]
+    sanjuan = hojas[nombre_hojas[32]]
+    sanluis = hojas[nombre_hojas[33]]
+    santacruz = hojas[nombre_hojas[34]]
+    santafe = hojas[nombre_hojas[35]]
+    santiagodelestero = hojas[nombre_hojas[36]]
+    tierradelfuego = hojas[nombre_hojas[37]]
+    tucuman = hojas[nombre_hojas[38]]
+
+
+
 
 st.write("---")
 
 columna3, columna4 = st.columns(2)
 with columna3:
-    st.button("GOBIERNO NACIONAL",use_container_width = True)
-    
+    if st.button("GOBIERNO NACIONAL",use_container_width = True):
+        hojas_gob_nacional = nombre_hojas[1:15]
+        gobierno_nacional()
+        st.selectbox("Seleccioná",hojas_gob_nacional )
+        
+
     
 with columna4:
-    st.button("GOBIERNOS PROVINCIALES",use_container_width = True)
+    if st.button("GOBIERNOS PROVINCIALES",use_container_width = True):
+        hojas_gob_prov = nombre_hojas[15:]
+        gobiernos_provinciales
+        st.selectbox("Seleccioná",hojas_gob_prov )
