@@ -81,15 +81,17 @@ if 'estado' not in st.session_state:
     }
 
 def pagina_gobierno_nacional():
-    st.write("Contenido para Gobierno Nacional")
     hojas_nacional = nombre_hojas[1:15]
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional)
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     st.write(opcion_seleccionada)
-    st.dataframe(hojas[opcion_seleccionada])
+    data = hojas[opcion_seleccionada]
+    data = data.replace('<table border="1" class="dataframe">',
+                                    '<table style="width: 100%; text-align: center;" border="1" class="dataframe">')
+    data = data.replace('<th>', '<th style="text-align: center; background-color: blue; color: white;">')
+    st.write(data, unsafe_allow_html=True)
 
 def pagina_gobiernos_provinciales():
-    st.write("Contenido para Gobiernos Provinciales")
     hojas_provincial = nombre_hojas[15:]
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_provincial)
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
