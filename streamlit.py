@@ -71,6 +71,12 @@ tucuman = hojas[nombre_hojas[38]]
 
 
 st.write("---")
+# Estado de la sesión
+if 'estado' not in st.session_state:
+    st.session_state.estado = {
+        'seleccion_boton': None,
+        'seleccion_desplegable': None
+    }
 # Estado de la selección del botón y del desplegable
 estado_seleccion_boton = None
 estado_seleccion_desplegable = None
