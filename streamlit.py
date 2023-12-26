@@ -83,7 +83,7 @@ if 'estado' not in st.session_state:
 def pagina_gobierno_nacional():
     st.write("Contenido para Gobierno Nacional")
     hojas_nacional = nombre_hojas[1:15]
-    opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional, index=st.session_state.estado['seleccion_desplegable'])
+    opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional)
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     st.write(opcion_seleccionada)
 
