@@ -63,8 +63,9 @@ def pagina_gobierno_nacional():
             # Mostrar la imagen en la primera columna
             col_imagen.image("imgs/javier_milei.png")
             
-            # Mostrar el texto en la segunda columna
-            col_texto.write(f"**{texto1}:** {texto2}")
+            
+            col_texto.write(f"**{texto1}:**")
+            col_texto.write(f"{texto2}:")
             
             contenedores.append(contenedor)
 
