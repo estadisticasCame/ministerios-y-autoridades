@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-columna1, columna2 = st.columns([1,2])
+columna1, columna2 = st.columns([2,1])
 with columna1:
     st.title("Tablero de control")
     st.header("Ministerios y Autoridades")
