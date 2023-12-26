@@ -47,6 +47,7 @@ def pagina_gobierno_nacional():
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
+        data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
         st.dataframe(data)
 
 def pagina_gobiernos_provinciales():
@@ -57,6 +58,10 @@ def pagina_gobiernos_provinciales():
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
         st.dataframe(data)
+        data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
+        st.dataframe(data)
+        st.image("imgs/javier_milei")
+
 
 # Crear columnas
 columna3, columna4 = st.columns(2)
