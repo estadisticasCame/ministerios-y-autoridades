@@ -74,7 +74,7 @@ def pagina_gobiernos_provinciales():
         contenedores = []
         # Llenar la lista de contenedores con imágenes y texto asociado
         for texto1, texto2 in zip( data["CONCATENACION"], data["ENTE"]):
-            contenedor = st.container()
+            contenedor = st.container(border=True)
             contenedor.image("imgs/javier_milei.png")
             contenedor.write(f"**{texto1}:** {texto2}")
             contenedores.append(contenedor)
