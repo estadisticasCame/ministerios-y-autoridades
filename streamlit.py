@@ -86,11 +86,15 @@ def pagina_gobierno_nacional():
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     st.write(opcion_seleccionada)
     data = hojas[opcion_seleccionada]
-    data = data.to_html(index=False, escape = False)
-    data = data.replace('<table border="1" class="dataframe">',
-                                    '<table style="width: 100%; text-align: center;" border="1" class="dataframe">')
-    data = data.replace('<th>', '<th style="text-align: center; background-color: blue; color: white;">')
-    st.write(data, unsafe_allow_html=True)
+    # Convertir DataFrame a HTML con estilos
+    data_html = df.to_html(index=False, escape=False)
+    styled_data_html = data_html.replace('<table border="1" class="dataframe">',
+                                        '<table style="width: 50%; margin:auto; text-align: center; border-collapse: collapse;" class="dataframe">')
+    styled_data_html = styled_data_html.replace('<th>', '<th style="text-align: center; background-color: #007BFF; color: white; padding: 8px;">')
+    styled_data_html = styled_data_html.replace('<td>', '<td style="text-align: center; border: 1px solid #ddd; padding: 8px;">')
+    
+    # Mostrar la tabla en Streamlit
+    st.write(styled_data_html, unsafe_allow_html=True)
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
