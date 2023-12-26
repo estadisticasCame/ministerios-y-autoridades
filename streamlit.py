@@ -71,18 +71,16 @@ tucuman = hojas[nombre_hojas[38]]
 
 
 st.write("---")
+import streamlit as st
+
 # Estado de la sesión
 if 'estado' not in st.session_state:
     st.session_state.estado = {
         'seleccion_boton': None,
         'seleccion_desplegable': None
     }
-# Estado de la selección del botón y del desplegable
-estado_seleccion_boton = None
-estado_seleccion_desplegable = None
 
 def pagina_gobierno_nacional():
-    global estado_seleccion_boton, estado_seleccion_desplegable
     st.write("Contenido para Gobierno Nacional")
     hojas_nacional = nombre_hojas[1:15]
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional, index=st.session_state.estado['seleccion_desplegable'])
@@ -90,9 +88,8 @@ def pagina_gobierno_nacional():
     st.write(opcion_seleccionada)
 
 def pagina_gobiernos_provinciales():
-    global estado_seleccion_boton, estado_seleccion_desplegable
-    hojas_provincial = nombre_hojas[15:]
     st.write("Contenido para Gobiernos Provinciales")
+    hojas_provincial = nombre_hojas[15:]
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_provincial, index=st.session_state.estado['seleccion_desplegable'])
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     st.write(opcion_seleccionada)
@@ -102,16 +99,16 @@ columna3, columna4 = st.columns(2)
 
 with columna3:
     if st.button("GOBIERNO NACIONAL", use_container_width=True):
-        estado_seleccion_boton = "gobierno_nacional"
-        estado_seleccion_desplegable = None
+        st.session_state.estado['seleccion_boton'] = "gobierno_nacional"
+        st.session_state.estado['seleccion_desplegable'] = None
 
 with columna4:
     if st.button("GOBIERNOS PROVINCIALES", use_container_width=True):
-        estado_seleccion_boton = "gobiernos_provinciales"
-        estado_seleccion_desplegable = None
+        st.session_state.estado['seleccion_boton'] = "gobiernos_provinciales"
+        st.session_state.estado['seleccion_desplegable'] = None
 
 # Mostrar la página correspondiente según el botón seleccionado
-if estado_seleccion_boton == "gobierno_nacional":
+if st.session_state.estado['seleccion_boton'] == "gobierno_nacional":
     pagina_gobierno_nacional()
-elif estado_seleccion_boton == "gobiernos_provinciales":
+elif st.session_state.estado['seleccion_boton'] == "gobiernos_provinciales":
     pagina_gobiernos_provinciales()
