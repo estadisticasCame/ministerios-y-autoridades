@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import openpyxl
 
 columna1, columna2 = st.columns(2)
 with columna1:
