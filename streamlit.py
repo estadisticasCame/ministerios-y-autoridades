@@ -98,6 +98,7 @@ def pagina_gobiernos_provinciales():
         # Colocar los contenedores en una fila
         fila_contenedores = st.columns(len(contenedores))
         for i, contenedor in enumerate(contenedores):
+            fila_contenedores[i].subheader(f"Elemento {i + 1}")
             fila_contenedores[i].write(contenedor)
 # Crear columnas
 columna3, columna4 = st.columns(2)
