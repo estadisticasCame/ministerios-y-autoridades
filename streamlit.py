@@ -87,7 +87,7 @@ def pagina_gobierno_nacional():
     st.write(opcion_seleccionada)
     data = hojas[opcion_seleccionada]
     # Convertir DataFrame a HTML con estilos
-    data_html = df.to_html(index=False, escape=False)
+    data_html = data.to_html(index=False, escape=False)
     styled_data_html = data_html.replace('<table border="1" class="dataframe">',
                                         '<table style="width: 50%; margin:auto; text-align: center; border-collapse: collapse;" class="dataframe">')
     styled_data_html = styled_data_html.replace('<th>', '<th style="text-align: center; background-color: #007BFF; color: white; padding: 8px;">')
