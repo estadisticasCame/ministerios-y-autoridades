@@ -50,13 +50,28 @@ def pagina_gobierno_nacional():
         except:
             pass
         st.dataframe(data)
-        columna_imagen, columna_texto = st.columns([1,2])
-        # Mostrar imágenes y texto en columnas separadas
-        for texto1, texto2 in zip( data["CONCATENACION"], data["ENTE"]):
-            with columna_imagen:
-                st.image("imgs/javier_milei.png")
-            with columna_texto:
-                st.write(f"**{texto1}:** {texto2}")   
+       # Crear una lista de contenedores para imágenes y texto asociado
+        contenedores = []
+        
+        # Llenar la lista de contenedores con imágenes y texto asociado
+        for  texto1, texto2 in zip( data["CONCATENACION"], data["ENTE"]):
+            contenedor = st.container(border=True)
+            
+            # Crear columnas dentro del contenedor
+            col_imagen, col_texto = contenedor.st.columns([1, 2])
+            
+            # Mostrar la imagen en la primera columna
+            col_imagen.image("imgs/javier_milei.png")
+            
+            # Mostrar el texto en la segunda columna
+            col_texto.write(f"**{texto1}:** {texto2}")
+            
+            contenedores.append(contenedor)
+
+# Colocar los contenedores en una fila
+fila_contenedores = st.beta_columns(len(contenedores))
+for i, contenedor in enumerate(contenedores):
+    fila_contenedores[i].write(contenedor)
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
@@ -76,7 +91,8 @@ def pagina_gobiernos_provinciales():
         for texto1, texto2 in zip( data["CONCATENACION"], data["ENTE"]):
             contenedor = st.container(border=True)
             contenedor.image("imgs/javier_milei.png")
-            contenedor.write(f"**{texto1}:** {texto2}")
+            contenedor.write(f"**{texto1}:**")
+            contenedor.write(f"{texto2}:")
             contenedores.append(contenedor)
         
         # Colocar los contenedores en una fila
