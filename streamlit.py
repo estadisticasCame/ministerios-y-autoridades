@@ -87,5 +87,5 @@ with columna4:
         hojas_gob_prov = nombre_hojas[15:]
         opcion_seleccionada = st.selectbox("Seleccioná",hojas_gob_prov )
     
-if opcion_seleccionada ==  hojas_gob_nacional[0] 
+if opcion_seleccionada ==  hojas_gob_nacional[0] :
     st.dataframe(presidencia_de_la_nacion)
