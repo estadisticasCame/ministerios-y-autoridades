@@ -58,7 +58,7 @@ def pagina_gobierno_nacional():
             contenedor = st.container(border=True)
             
             # Crear columnas dentro del contenedor
-            col_imagen, col_texto = contenedor.st.columns([1, 2])
+            col_imagen, col_texto = contenedor.columns([1, 2])
             
             # Mostrar la imagen en la primera columna
             col_imagen.image("imgs/javier_milei.png")
