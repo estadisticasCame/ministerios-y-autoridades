@@ -59,7 +59,6 @@ def pagina_gobiernos_provinciales():
         data = hojas[opcion_seleccionada]
         st.dataframe(data)
         #data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
-        st.dataframe(data)
         st.image("imgs/javier_milei")
 
 
