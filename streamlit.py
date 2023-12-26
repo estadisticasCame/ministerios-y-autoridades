@@ -68,10 +68,10 @@ def pagina_gobierno_nacional():
             
             contenedores.append(contenedor)
 
-            # Colocar los contenedores en una fila
-            #fila_contenedores = st.columns(len(contenedores))
-            for i, contenedor in enumerate(contenedores):
-                st.write(contenedor)
+        # Colocar los contenedores en una fila
+        fila_contenedores = st.columns(len(contenedores))
+        for i, contenedor in enumerate(contenedores):
+            fila_contenedores[i].write(contenedor)
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
