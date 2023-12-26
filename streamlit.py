@@ -31,8 +31,6 @@ def cargar_datos_excel():
 hojas, nombre_hojas = cargar_datos_excel()
 
 st.write("---")
-import streamlit as st
-
 # Estado de la sesión
 if 'estado' not in st.session_state:
     st.session_state.estado = {
@@ -47,8 +45,18 @@ def pagina_gobierno_nacional():
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
-        data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
+        try:
+            data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
+        except:
+            pass
         st.dataframe(data)
+        columna5, columna6 = st.columns([1,2])
+        with columna5:
+            for elemento in data:
+                st.image("imgs/javier_milei.png")
+        with columna6:
+            for elemento in data["CONCATENACION"]:
+                st.write(elemento)    
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
@@ -57,10 +65,18 @@ def pagina_gobiernos_provinciales():
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
+        try:
+            data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
+        except:
+            pass
         st.dataframe(data)
-        #data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
-        st.image("imgs/javier_milei.png")
-
+        columna5, columna6 = st.columns([1,2])
+        with columna5:
+            for elemento in data:
+                st.image("imgs/javier_milei.png")
+        with columna6:
+            for elemento in data["CONCATENACION"]:
+                st.write(elemento)    
 
 # Crear columnas
 columna3, columna4 = st.columns(2)
