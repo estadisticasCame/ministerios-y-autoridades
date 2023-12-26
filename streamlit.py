@@ -73,11 +73,14 @@ tucuman = hojas[nombre_hojas[38]]
 
 
 st.write("---")
+auxiliar_gobierno_nacional = False
+auxiliar_gobierno_provincial = False
 
 columna3, columna4 = st.columns(2)
 with columna3:
     if st.button("GOBIERNO NACIONAL",use_container_width = True):
         hojas_gob_nacional = nombre_hojas[1:15]
+        auxiliar_gobierno_nacional = True
         opcion_seleccionada = st.selectbox("Seleccioná",hojas_gob_nacional )
         
 
@@ -85,7 +88,15 @@ with columna3:
 with columna4:
     if st.button("GOBIERNOS PROVINCIALES",use_container_width = True):
         hojas_gob_prov = nombre_hojas[15:]
+        auxiliar_gobierno_provincial = True
         opcion_seleccionada = st.selectbox("Seleccioná",hojas_gob_prov )
-    
-if opcion_seleccionada ==  hojas_gob_nacional[0] :
-    st.dataframe(presidencia_de_la_nacion)
+
+if (auxiliar_gobierno_provincial or  auxiliar_gobierno_nacional) == True:
+    if auxiliar_gobierno_nacional == True:
+
+        if (opcion_seleccionada ==  hojas_gob_nacional[0] ):
+            st.dataframe(presidencia_de_la_nacion)
+        
+    else:   
+        if (opcion_seleccionada ==  hojas_gob_prov[0] ):
+            st.dataframe(buenos_aires)
