@@ -50,13 +50,13 @@ def pagina_gobierno_nacional():
         except:
             pass
         st.dataframe(data)
-        columna5, columna6 = st.columns([1,2])
-        with columna5:
-            for elemento in data:
+        columna_imagen, columna_texto = st.columns([1,2])
+        # Mostrar imágenes y texto en columnas separadas
+        for texto1, texto2 in zip( data["CONCATENACION"], data["ENTE"]):
+            with columna_imagen:
                 st.image("imgs/javier_milei.png")
-        with columna6:
-            for elemento in data["CONCATENACION"]:
-                st.write(elemento)    
+            with columna_texto:
+                st.write(f"**{texto1}:** {texto2}")   
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
@@ -70,14 +70,14 @@ def pagina_gobiernos_provinciales():
         except:
             pass
         st.dataframe(data)
-        columna5, columna6 = st.columns([1,2])
-        with columna5:
-            for elemento in data:
-                st.image("imgs/javier_milei.png")
-        with columna6:
-            for elemento in data["CONCATENACION"]:
-                st.write(elemento)    
 
+        columna_imagen, columna_texto = st.columns([1,2])
+        # Mostrar imágenes y texto en columnas separadas
+        for texto1, texto2 in zip( data["CONCATENACION"], data["ENTE"]):
+            with columna_imagen:
+                st.image("imgs/javier_milei.png")
+            with columna_texto:
+                st.write(f"**{texto1}:** {texto2}")
 # Crear columnas
 columna3, columna4 = st.columns(2)
 
