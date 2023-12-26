@@ -27,8 +27,8 @@ st.write("---")
 
 columna3, columna4 = st.columns(2)
 with columna3:
-    st.button("GOBIERNO NACIONAL",use_column_width = True)
+    st.button("GOBIERNO NACIONAL",use_container_width = True)
     
     
 with columna4:
-    st.button("GOBIERNOS PROVINCIALES",use_column_width = True)
+    st.button("GOBIERNOS PROVINCIALES",use_container_width = True)
