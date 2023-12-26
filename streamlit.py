@@ -22,3 +22,13 @@ def cargar_datos_excel():
     return hojas
 
 hojas = cargar_datos_excel()
+
+st.write("---")
+
+columna3, columna4 = st.columns(2)
+with columna3:
+    st.button("GOBIERNO NACIONAL")
+    
+    
+with columna4:
+    st.button("GOBIERNOS PROVINCIALES")
