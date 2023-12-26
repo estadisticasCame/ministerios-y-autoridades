@@ -70,14 +70,19 @@ def pagina_gobiernos_provinciales():
         except:
             pass
         st.dataframe(data)
-
-        columna_imagen, columna_texto = st.columns([1,2])
-        # Mostrar imágenes y texto en columnas separadas
+        # Crear una lista de contenedores para imágenes y texto asociado
+        contenedores = []
+        # Llenar la lista de contenedores con imágenes y texto asociado
         for texto1, texto2 in zip( data["CONCATENACION"], data["ENTE"]):
-            with columna_imagen:
-                st.image("imgs/javier_milei.png")
-            with columna_texto:
-                st.write(f"**{texto1}:** {texto2}")
+            contenedor = st.container()
+            contenedor.image("imgs/javier_milei.png", use_column_width=True)
+            contenedor.write(f"**{texto1}:** {texto2}")
+            contenedores.append(contenedor)
+        
+        # Colocar los contenedores en una fila
+        fila_contenedores = st.beta_columns(len(contenedores))
+        for i, contenedor in enumerate(contenedores):
+            fila_contenedores[i].write(contenedor)
 # Crear columnas
 columna3, columna4 = st.columns(2)
 
