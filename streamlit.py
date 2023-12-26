@@ -14,7 +14,7 @@ with columna2:
 @st.cache_data
 def cargar_datos_excel():
     # Ingestamos el archivo de excel del meppi
-    excel = pd.read_excel("Datos/Ministerios y autoridades.xlsx", sheet_name=None)
+    excel = pd.read_excel("Datos/Ministerios y autoridades.xlsx", sheet_name=None, engine = "openpyxl")
     # Almacenamos las hojas en un diccionario de Pandas
     hojas = {}
     for nombre_hoja, datos_hoja in excel.items():
