@@ -7,7 +7,7 @@ with columna1:
     st.header("Ministerios y Autoridades")
     
 with columna2:
-    st.image("imgs/escudo.png")
+    st.image("imgs/escudo.png",use_column_width=True)
 
 # Realizamos la carga de datos y lo guardamos en cache de streamlit
 @st.cache_data
