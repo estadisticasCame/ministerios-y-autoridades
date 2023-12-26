@@ -69,23 +69,25 @@ santiagodelestero = hojas[nombre_hojas[36]]
 tierradelfuego = hojas[nombre_hojas[37]]
 tucuman = hojas[nombre_hojas[38]]
 
-def gobierno_nacional():
-    opcion_seleccionada = st.selectbox("Seleccioná",hojas_gob_nacional )
-    if (opcion_seleccionada ==  hojas_gob_nacional[0] ):
-        st.dataframe(presidencia_de_la_nacion)
-
 
 st.write("---")
+def pagina_gobierno_nacional():
+    # Lógica y contenido para la página de Gobierno Nacional
+    st.write("Contenido para Gobierno Nacional")
+    ola = st.selectbox("ola",[1,2,3])
+    st.write(ola)
 
+def pagina_gobiernos_provinciales():
+    # Lógica y contenido para la página de Gobiernos Provinciales
+    st.write("Contenido para Gobiernos Provinciales")
 
 columna3, columna4 = st.columns(2)
 with columna3:
     if st.button("GOBIERNO NACIONAL",use_container_width = True):
-        hojas_gob_nacional = nombre_hojas[1:15]
-        gobierno_nacional()
+       pagina_gobierno_nacional()
     
         
         
 with columna4:
     if st.button("GOBIERNOS PROVINCIALES",use_container_width = True):
-        hojas_gob_prov = nombre_hojas[15:]
+        pagina_gobiernos_provinciales()
