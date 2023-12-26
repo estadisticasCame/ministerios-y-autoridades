@@ -91,5 +91,5 @@ with columna3:
 with columna4:
     if st.button("GOBIERNOS PROVINCIALES",use_container_width = True):
         hojas_gob_prov = nombre_hojas[15:]
-        gobiernos_provinciales
+        gobiernos_provinciales()
         st.selectbox("Seleccioná",hojas_gob_prov )
