@@ -42,17 +42,21 @@ if 'estado' not in st.session_state:
 
 def pagina_gobierno_nacional():
     hojas_nacional = nombre_hojas[1:15]
+    hojas_nacional.insert(0,"-")
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional)
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
-    data = hojas[opcion_seleccionada]
-    st.dataframe(data)
+    if opcion_seleccionada != "-":
+        data = hojas[opcion_seleccionada]
+        st.dataframe(data)
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
+    hojas_provincial.insert(0,"-")
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_provincial)
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
-    data = hojas[opcion_seleccionada]
-    st.dataframe(data)
+    if opcion_seleccionada != "-":
+        data = hojas[opcion_seleccionada]
+        st.dataframe(data)
 
 # Crear columnas
 columna3, columna4 = st.columns(2)
