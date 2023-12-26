@@ -93,6 +93,7 @@ with columna4:
 
 if (auxiliar_gobierno_provincial or  auxiliar_gobierno_nacional) == True:
     if auxiliar_gobierno_nacional == True:
+        auxiliar_gobierno_nacional = True
         opcion_seleccionada = st.selectbox("Seleccioná",hojas_gob_nacional )
         if (opcion_seleccionada ==  hojas_gob_nacional[0] ):
             st.dataframe(presidencia_de_la_nacion)
