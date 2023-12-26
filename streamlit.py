@@ -71,23 +71,36 @@ tucuman = hojas[nombre_hojas[38]]
 
 
 st.write("---")
+# Estado de la selección del botón y del desplegable
+estado_seleccion_boton = None
+estado_seleccion_desplegable = None
+
 def pagina_gobierno_nacional():
-    # Lógica y contenido para la página de Gobierno Nacional
+    global estado_seleccion_boton, estado_seleccion_desplegable
     st.write("Contenido para Gobierno Nacional")
-    ola = st.selectbox("ola",[1,2,3])
+    ola = st.selectbox("ola", [1, 2, 3], key="desplegable_gobierno_nacional", index=estado_seleccion_desplegable)
+    estado_seleccion_desplegable = st.session_state.desplegable_gobierno_nacional
     st.write(ola)
 
 def pagina_gobiernos_provinciales():
-    # Lógica y contenido para la página de Gobiernos Provinciales
+    global estado_seleccion_boton, estado_seleccion_desplegable
     st.write("Contenido para Gobiernos Provinciales")
 
+# Crear columnas
 columna3, columna4 = st.columns(2)
+
 with columna3:
-    if st.button("GOBIERNO NACIONAL",use_container_width = True):
-       pagina_gobierno_nacional()
-    
-        
-        
+    if st.button("GOBIERNO NACIONAL", use_container_width=True):
+        estado_seleccion_boton = "gobierno_nacional"
+        estado_seleccion_desplegable = None
+
 with columna4:
-    if st.button("GOBIERNOS PROVINCIALES",use_container_width = True):
-        pagina_gobiernos_provinciales()
+    if st.button("GOBIERNOS PROVINCIALES", use_container_width=True):
+        estado_seleccion_boton = "gobiernos_provinciales"
+        estado_seleccion_desplegable = None
+
+# Mostrar la página correspondiente según el botón seleccionado
+if estado_seleccion_boton == "gobierno_nacional":
+    pagina_gobierno_nacional()
+elif estado_seleccion_boton == "gobiernos_provinciales":
+    pagina_gobiernos_provinciales()
