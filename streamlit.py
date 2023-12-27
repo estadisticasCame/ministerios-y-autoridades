@@ -51,7 +51,7 @@ def pagina_gobierno_nacional():
             pass
         st.dataframe(data)
         if (opcion_seleccionada == "Diputados" ) or (opcion_seleccionada == "Senadores"):
-            listado_provincias = data["Provincia"].tolist()
+            listado_provincias = data["Provincia"].unique().tolist()
             listado_provincias.insert(0,"-")
             filtro_provincia = st.selectbox("Seleccioná la provincia", listado_provincias)
             if filtro_provincia != "-":
