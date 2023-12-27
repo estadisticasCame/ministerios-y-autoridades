@@ -45,8 +45,7 @@ def pagina_gobierno_nacional():
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
-        #data = data.loc[:, ~data.columns.duplicated()]
-        #st.dataframe(data)
+        data = data.loc[:, ~data.columns.duplicated()]
         try:
             data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
         except:
