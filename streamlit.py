@@ -64,7 +64,7 @@ def pagina_gobierno_nacional():
                 # Aplica estilo solo a la columna de texto
                 col_texto.markdown(
                     f"<div style='line-height: 1.5; font-size: 17px;'>"
-                    f"<strong>{texto1}</strong><br>{texto2}<br><a href='mailto:{texto3}' style='color: blue;'>{texto3}</a><br>{texto4}"
+                    f"<strong>{texto1}</strong><br>{texto2}<br><a href='mailto:{texto3}'>{texto3}</a><br>{texto4}"
                     "</div>",
                     unsafe_allow_html=True
                 )
