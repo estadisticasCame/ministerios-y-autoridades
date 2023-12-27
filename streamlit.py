@@ -46,7 +46,7 @@ def pagina_gobierno_nacional():
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
         data = data.loc[:, ~data.columns.duplicated()]
-        
+        st.dataframe(data)  
         if (opcion_seleccionada == "Diputados" ) or (opcion_seleccionada == "Senadores"):
             try:
                 data["CONCATENACION"] = data["Tratamiento"] + " " + data["Nombre y Apellido"]
@@ -61,7 +61,7 @@ def pagina_gobierno_nacional():
                 )
             except:
                 pass
-            st.dataframe(data)    
+              
             listado_provincias = data["Provincia"].unique().tolist()
             listado_provincias.insert(0,"-")
             filtro_provincia = st.selectbox("Seleccioná la provincia", listado_provincias)
@@ -84,7 +84,7 @@ def pagina_gobierno_nacional():
                         # Aplica estilo solo a la columna de texto
                         col_texto.markdown(
                             f"<div style='line-height: 1.5; font-size: 17px;'>"
-                            f"<strong>{texto1}</strong><br><a href='mailto:{texto2}'>{texto2}</a><br><br>{texto3}<br>mandato: {texto4}"
+                            f"<strong>{texto1}</strong><br><a href='mailto:{texto2}'>{texto2}</a><br>{texto3}<br>mandato: {texto4}"
                             "</div>",
                             unsafe_allow_html=True
                         )
