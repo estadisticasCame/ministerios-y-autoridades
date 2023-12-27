@@ -86,7 +86,7 @@ def pagina_gobiernos_provinciales():
         for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"]):
             with st.container(border=True):
                 # Crear columnas dentro del contenedor
-                col_imagen, col_texto = st.columns([1, 2])
+                col_imagen, col_texto = st.columns([0.7, 2.3])
         
                 # Mostrar la imagen en la primera columna
                 col_imagen.image("imgs/javier_milei.png")
