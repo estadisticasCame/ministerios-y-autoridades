@@ -58,7 +58,7 @@ def pagina_gobierno_nacional():
                 data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
                 # Crear una lista de contenedores para imágenes y texto asociado
                 # Crear una lista de contenedores para imágenes y texto asociado
-                for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"]):
+                for texto1, texto2, texto3 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"]):
                     with st.container(border=True):
                         # Crear columnas dentro del contenedor
                         col_imagen, col_texto = st.columns([0.7, 2.3])
