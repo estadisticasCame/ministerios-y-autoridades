@@ -86,29 +86,60 @@ def pagina_gobierno_nacional():
             listado_provincias.sort()
             listado_provincias.insert(0,"-")
             filtro_provincia = st.selectbox("Seleccioná la provincia", listado_provincias)
+            
+            bloque = data["Bloque"].unique().tolist()
+            bloque.sort()
+            bloque.insert(0,"Todos")
+            bloque_seleccionado = st.selectbox("Seleccioná el bloque", bloque)
             if filtro_provincia != "-":
-                data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
-                # Crear una lista de contenedores para imágenes y texto asociado
-                # Crear una lista de contenedores para imágenes y texto asociado
-                for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
-                    # Reemplazar valores nulos con "-"
-                    texto1 = texto1 if not pd.isna(texto1) else "-"
-                    texto2 = texto2 if not pd.isna(texto2) else "-"
-                    texto3 = texto3 if not pd.isna(texto3) else "-"
-                    texto4 = texto4 if not pd.isna(texto4) else "-"
-                    with st.container(border=True):
-                        # Crear columnas dentro del contenedor
-                        col_imagen, col_texto = st.columns([0.7, 2.3])
-                
-                        # Mostrar la imagen en la primera columna
-                        col_imagen.image("imgs/javier_milei.png")
-                        # Aplica estilo solo a la columna de texto
-                        col_texto.markdown(
-                            f"<div style='line-height: 1.5; font-size: 17px;'>"
-                            f"<strong>{texto1}</strong><br><a href='mailto:{texto2}'>{texto2}</a><br>{texto3}<br>Mandato: {texto4}"
-                            "</div>",
-                            unsafe_allow_html=True
-                        )
+                if bloque_seleccionado == "Todos":
+                    data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
+                    # Crear una lista de contenedores para imágenes y texto asociado
+                    # Crear una lista de contenedores para imágenes y texto asociado
+                    for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
+                        # Reemplazar valores nulos con "-"
+                        texto1 = texto1 if not pd.isna(texto1) else "-"
+                        texto2 = texto2 if not pd.isna(texto2) else "-"
+                        texto3 = texto3 if not pd.isna(texto3) else "-"
+                        texto4 = texto4 if not pd.isna(texto4) else "-"
+                        with st.container(border=True):
+                            # Crear columnas dentro del contenedor
+                            col_imagen, col_texto = st.columns([0.7, 2.3])
+                    
+                            # Mostrar la imagen en la primera columna
+                            col_imagen.image("imgs/javier_milei.png")
+                            # Aplica estilo solo a la columna de texto
+                            col_texto.markdown(
+                                f"<div style='line-height: 1.5; font-size: 17px;'>"
+                                f"<strong>{texto1}</strong><br><a href='mailto:{texto2}'>{texto2}</a><br>{texto3}<br>Mandato: {texto4}"
+                                "</div>",
+                                unsafe_allow_html=True
+                            )
+                else:
+                    data = data[data["Bloque"].str.contains(bloque_seleccionado, na= False, case= False)]
+                    data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
+                    # Crear una lista de contenedores para imágenes y texto asociado
+                    # Crear una lista de contenedores para imágenes y texto asociado
+                    for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
+                        # Reemplazar valores nulos con "-"
+                        texto1 = texto1 if not pd.isna(texto1) else "-"
+                        texto2 = texto2 if not pd.isna(texto2) else "-"
+                        texto3 = texto3 if not pd.isna(texto3) else "-"
+                        texto4 = texto4 if not pd.isna(texto4) else "-"
+                        with st.container(border=True):
+                            # Crear columnas dentro del contenedor
+                            col_imagen, col_texto = st.columns([0.7, 2.3])
+                    
+                            # Mostrar la imagen en la primera columna
+                            col_imagen.image("imgs/javier_milei.png")
+                            # Aplica estilo solo a la columna de texto
+                            col_texto.markdown(
+                                f"<div style='line-height: 1.5; font-size: 17px;'>"
+                                f"<strong>{texto1}</strong><br><a href='mailto:{texto2}'>{texto2}</a><br>{texto3}<br>Mandato: {texto4}"
+                                "</div>",
+                                unsafe_allow_html=True
+                            )
+                    
             else:
                 pass
 
