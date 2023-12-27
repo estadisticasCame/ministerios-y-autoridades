@@ -52,7 +52,7 @@ def pagina_gobierno_nacional():
         st.dataframe(data)
        # Crear una lista de contenedores para imágenes y texto asociado
         # Crear una lista de contenedores para imágenes y texto asociado
-        for texto1, texto2 in zip(data["CONCATENACION"], data["ENTE"]):
+        for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL 1"] + data["TELEFONO1"]):
             with st.container(border=True):
                 # Crear columnas dentro del contenedor
                 col_imagen, col_texto = st.columns([1, 2])
@@ -61,6 +61,8 @@ def pagina_gobierno_nacional():
                 col_imagen.image("imgs/javier_milei.png")
                 col_texto.write(f"**{texto1}**")
                 col_texto.write(f"{texto2}")
+                col_texto.write(f"{texto3}")
+                col_texto.write(f"{texto4}")
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
