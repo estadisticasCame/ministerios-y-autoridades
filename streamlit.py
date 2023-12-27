@@ -45,13 +45,12 @@ def pagina_gobierno_nacional():
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
-        data = data.loc[:, ~data.columns.duplicated()]
-        try:
-            data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
-        except:
-            pass
         st.dataframe(data)
         if (opcion_seleccionada == "Diputados" ) or (opcion_seleccionada == "Senadores"):
+            try:
+                data["CONCATENACION"] = data["Tratamiento"] + " " + data["Nombre y Apellido"]
+            except:
+                pass
             listado_provincias = data["Provincia"].unique().tolist()
             listado_provincias.insert(0,"-")
             filtro_provincia = st.selectbox("Seleccioná la provincia", listado_provincias)
@@ -59,7 +58,7 @@ def pagina_gobierno_nacional():
                 data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
                 # Crear una lista de contenedores para imágenes y texto asociado
                 # Crear una lista de contenedores para imágenes y texto asociado
-                for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"]):
+                for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"]):
                     with st.container(border=True):
                         # Crear columnas dentro del contenedor
                         col_imagen, col_texto = st.columns([0.7, 2.3])
@@ -77,8 +76,12 @@ def pagina_gobierno_nacional():
                 pass
 
         else:    
+            try:
+                data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
+            except:
+                pass
             # Crear una lista de contenedores para imágenes y texto asociado
-            for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL 1"] , data["TELEFONO1"]):
+            for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"]):
                 with st.container(border=True):
                     # Crear columnas dentro del contenedor
                     col_imagen, col_texto = st.columns([0.7, 2.3])
