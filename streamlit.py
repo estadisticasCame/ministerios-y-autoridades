@@ -63,6 +63,7 @@ def pagina_gobierno_nacional():
     hojas_nacional = nombre_hojas[1:15]
     hojas_nacional.insert(0,"-")
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional)
+    st.write("---")
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
@@ -174,6 +175,7 @@ def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
     hojas_provincial.insert(0,"-")
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_provincial)
+    st.write("---")
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
