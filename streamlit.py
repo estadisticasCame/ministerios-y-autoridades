@@ -49,7 +49,8 @@ def pagina_gobierno_nacional():
         st.dataframe(data)
         if (opcion_seleccionada == "Diputados" ) or (opcion_seleccionada == "Senadores"):
             try:
-                data["CONCATENACION"] = data["Tratamiento"] + " " + data["Nombre y Apellido"]
+                data["CONCATENACION"] = data["Tratamiento"] + " | " + data["Nombre y Apellido"]
+                data["MANDATO"] = data["Inicio de Mandato"] + " | " + data["Fin del Mandato"]
             except:
                 pass
             listado_provincias = data["Provincia"].unique().tolist()
@@ -59,11 +60,12 @@ def pagina_gobierno_nacional():
                 data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
                 # Crear una lista de contenedores para imágenes y texto asociado
                 # Crear una lista de contenedores para imágenes y texto asociado
-                for texto1, texto2, texto3 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"]):
+                for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"],data["MANDATO"]):
                     # Reemplazar valores nulos con "-"
                     texto1 = texto1 if not pd.isna(texto1) else "-"
                     texto2 = texto2 if not pd.isna(texto2) else "-"
                     texto3 = texto3 if not pd.isna(texto3) else "-"
+                    texto4 = texto4 if not pd.isna(texto4) else "-"
                     with st.container(border=True):
                         # Crear columnas dentro del contenedor
                         col_imagen, col_texto = st.columns([0.7, 2.3])
@@ -73,7 +75,7 @@ def pagina_gobierno_nacional():
                         # Aplica estilo solo a la columna de texto
                         col_texto.markdown(
                             f"<div style='line-height: 1.5; font-size: 17px;'>"
-                            f"<strong>{texto1}</strong><br><a href='mailto:{texto2}'>{texto2}</a><br><br>{texto3}"
+                            f"<strong>{texto1}</strong><br><a href='mailto:{texto2}'>{texto2}</a><br><br>{texto3}<br>{texto4}"
                             "</div>",
                             unsafe_allow_html=True
                         )
