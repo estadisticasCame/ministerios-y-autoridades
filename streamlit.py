@@ -50,6 +50,9 @@ def pagina_gobierno_nacional():
         if (opcion_seleccionada == "Diputados" ) or (opcion_seleccionada == "Senadores"):
             try:
                 data["CONCATENACION"] = data["Tratamiento"] + " " + data["Nombre y Apellido"]
+                # Suponiendo que tus columnas de fechas son del tipo datetime
+                data["Inicio de Mandato"] = pd.to_datetime(data["Inicio de Mandato"])
+                data["Fin del Mandato"] = pd.to_datetime(data["Fin del Mandato"])
                 # Crear la nueva columna "MANDATO" con las fechas en el formato deseado
                 data["MANDATO"] = (
                     data["Inicio de Mandato"].dt.strftime("%d/%m/%Y")
