@@ -59,7 +59,13 @@ def pagina_gobierno_nacional():
         
                 # Mostrar la imagen en la primera columna
                 col_imagen.image("imgs/javier_milei.png")
-                col_texto.write(f"**{texto1}**<br>{texto2}<br>{texto3}<br>{texto4}")
+                # Aplica estilo solo a la columna de texto
+                col_texto.markdown(
+                    f"<div style='line-height: 1.2;'>"
+                    f"**{texto1}**<br>{texto2}<br>{texto3}<br>{texto4}"
+                    "</div>",
+                    unsafe_allow_html=True
+                )
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
