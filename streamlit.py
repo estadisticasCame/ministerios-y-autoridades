@@ -50,7 +50,12 @@ def pagina_gobierno_nacional():
         if (opcion_seleccionada == "Diputados" ) or (opcion_seleccionada == "Senadores"):
             try:
                 data["CONCATENACION"] = data["Tratamiento"] + " " + data["Nombre y Apellido"]
-                data["MANDATO"] = data["Inicio de Mandato"] + " | " + data["Fin del Mandato"]
+                # Crear la nueva columna "MANDATO" con las fechas en el formato deseado
+                data["MANDATO"] = (
+                    data["Inicio de Mandato"].dt.strftime("%d/%m/%Y")
+                    + " | "
+                    + data["Fin del Mandato"].dt.strftime("%d/%m/%Y")
+                )
             except:
                 pass
             st.dataframe(data)    
