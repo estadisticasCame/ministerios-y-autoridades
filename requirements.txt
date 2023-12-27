@@ -1,4 +1,4 @@
-pandas
 streamlit
+pandas
+pygithub==1.55
 openpyxl
-github
