@@ -1,3 +1,11 @@
+# Importamos las librerias a utilizar
+import datetime
+import pytz
+import time
+import pandas as pd
+from github import Github
+import io
+import github
 import pandas as pd
 import streamlit as st
 
@@ -8,12 +16,25 @@ with columna1:
     
 with columna2:
     st.image("imgs/escudo.png", width=150)
+    
+
 
 # Realizamos la carga de datos y lo guardamos en cache de streamlit
 @st.cache_data
 def cargar_datos_excel():
+    # ACCEDEMOS A LOS DATOS EN TIEMPO REAL
+    github_token = st.secrets["TOKEN"] 
+    repo_name = st.secrets["REPO"]
+    file_path = st.secrets["ARCHIVO"]   
+        
+    g = Github(github_token)
+    repo = g.get_repo(repo_name)
+    contents = repo.get_contents(file_path)
+    # Create a file-like object from the decoded content
+    content_bytes = contents.decoded_content
+    content_file = io.BytesIO(content_bytes)
     # Ingestamos el archivo de excel del meppi
-    excel = pd.read_excel("Datos/Ministerios y autoridades.xlsx", sheet_name=None)
+    excel = pd.read_excel(content_file, sheet_name=None)
     # Almacenamos las hojas en un diccionario de Pandas
     hojas = {}
     nombre_hojas = []
