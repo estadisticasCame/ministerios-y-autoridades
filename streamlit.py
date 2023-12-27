@@ -50,24 +50,49 @@ def pagina_gobierno_nacional():
         except:
             pass
         st.dataframe(data)
-       # Crear una lista de contenedores para imágenes y texto asociado
-        # Crear una lista de contenedores para imágenes y texto asociado
-        for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL 1"] , data["TELEFONO1"]):
-            with st.container(border=True):
-                # Crear columnas dentro del contenedor
-                col_imagen, col_texto = st.columns([0.7, 2.3])
-        
-                # Mostrar la imagen en la primera columna
-                col_imagen.image("imgs/javier_milei.png")
-                # Aplica estilo solo a la columna de texto
-                # Aplica estilo solo a la columna de texto
-                # Aplica estilo solo a la columna de texto
-                col_texto.markdown(
-                    f"<div style='line-height: 1.5; font-size: 17px;'>"
-                    f"<strong>{texto1}</strong><br>{texto2}<br><a href='mailto:{texto3}'>{texto3}</a><br>{texto4}"
-                    "</div>",
-                    unsafe_allow_html=True
-                )
+        if (opcion_seleccionada == "Diputados" ) or (opcion_seleccionada == "Senadores"):
+            listado_provincias = data["Provincia"].tolist()
+            listado_provincias.insert(0,"-")
+            filtro_provincia = st.selectbox("Seleccioná la provincia", listado_provincias)
+            if filtro_provincia != "-":
+                data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
+                # Crear una lista de contenedores para imágenes y texto asociado
+                # Crear una lista de contenedores para imágenes y texto asociado
+                for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"]):
+                    with st.container(border=True):
+                        # Crear columnas dentro del contenedor
+                        col_imagen, col_texto = st.columns([0.7, 2.3])
+                
+                        # Mostrar la imagen en la primera columna
+                        col_imagen.image("imgs/javier_milei.png")
+                        # Aplica estilo solo a la columna de texto
+                        col_texto.markdown(
+                            f"<div style='line-height: 1.5; font-size: 17px;'>"
+                            f"<strong>{texto1}</strong><br>{texto2}<br><a href='mailto:{texto3}'>{texto3}</a><br>{texto4}"
+                            "</div>",
+                            unsafe_allow_html=True
+                        )
+            else:
+                pass
+
+        else:    
+            # Crear una lista de contenedores para imágenes y texto asociado
+            for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL 1"] , data["TELEFONO1"]):
+                with st.container(border=True):
+                    # Crear columnas dentro del contenedor
+                    col_imagen, col_texto = st.columns([0.7, 2.3])
+            
+                    # Mostrar la imagen en la primera columna
+                    col_imagen.image("imgs/javier_milei.png")
+                    # Aplica estilo solo a la columna de texto
+                    # Aplica estilo solo a la columna de texto
+                    # Aplica estilo solo a la columna de texto
+                    col_texto.markdown(
+                        f"<div style='line-height: 1.5; font-size: 17px;'>"
+                        f"<strong>{texto1}</strong><br>{texto2}<br><a href='mailto:{texto3}'>{texto3}</a><br>{texto4}"
+                        "</div>",
+                        unsafe_allow_html=True
+                    )
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
@@ -81,8 +106,7 @@ def pagina_gobiernos_provinciales():
         except:
             pass
         st.dataframe(data)
-        # Crear una lista de contenedores para imágenes y texto asociado
-        # Crear una lista de contenedores para imágenes y texto asociado
+
         for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"]):
             with st.container(border=True):
                 # Crear columnas dentro del contenedor
@@ -96,9 +120,7 @@ def pagina_gobiernos_provinciales():
                     f"<strong>{texto1}</strong><br>{texto2}<br><a href='mailto:{texto3}'>{texto3}</a><br>{texto4}"
                     "</div>",
                     unsafe_allow_html=True
-                )
-
-
+                )            
 
 
 # Crear columnas
