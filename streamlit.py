@@ -67,7 +67,6 @@ def pagina_gobierno_nacional():
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
         data = data.loc[:, ~data.columns.duplicated()]
-        st.dataframe(data)  
         if (opcion_seleccionada == "Diputados" ) or (opcion_seleccionada == "Senadores"):
             try:
                 data["CONCATENACION"] = data["Tratamiento"] + " " + data["Nombre y Apellido"]
@@ -152,13 +151,12 @@ def pagina_gobiernos_provinciales():
             data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
         except:
             pass
-        st.dataframe(data)
-
         for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"]):
             # Reemplazar valores nulos con "-"
             texto1 = texto1 if not pd.isna(texto1) else "-"
             texto2 = texto2 if not pd.isna(texto2) else "-"
             texto3 = texto3 if not pd.isna(texto3) else "-"
+            texto4 = texto4 if not pd.isna(texto4) else "-"
             with st.container(border=True):
                 # Crear columnas dentro del contenedor
                 col_imagen, col_texto = st.columns([0.7, 2.3])
