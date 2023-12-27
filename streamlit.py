@@ -52,7 +52,7 @@ def pagina_gobierno_nacional():
         st.dataframe(data)
        # Crear una lista de contenedores para imágenes y texto asociado
         # Crear una lista de contenedores para imágenes y texto asociado
-        for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL 1"] + data["TELEFONO1"]):
+        for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL 1"] , data["TELEFONO1"]):
             with st.container(border=True):
                 # Crear columnas dentro del contenedor
                 col_imagen, col_texto = st.columns([1, 2])
@@ -78,7 +78,7 @@ def pagina_gobiernos_provinciales():
         st.dataframe(data)
         # Crear una lista de contenedores para imágenes y texto asociado
         # Crear una lista de contenedores para imágenes y texto asociado
-        for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL 1"] + data["TELEFONO1"]):
+        for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL 1"] , data["TELEFONO1"]):
             with st.container(border=True):
                 # Crear columnas dentro del contenedor
                 col_imagen, col_texto = st.columns([1, 2])
