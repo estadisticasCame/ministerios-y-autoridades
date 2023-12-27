@@ -45,6 +45,7 @@ def pagina_gobierno_nacional():
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     if opcion_seleccionada != "-":
         data = hojas[opcion_seleccionada]
+        data = data.loc[:, ~data.columns.duplicated()]
         st.dataframe(data)
         if (opcion_seleccionada == "Diputados" ) or (opcion_seleccionada == "Senadores"):
             try:
