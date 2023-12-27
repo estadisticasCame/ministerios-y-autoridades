@@ -87,13 +87,13 @@ def pagina_gobierno_nacional():
             listado_provincias.insert(0,"-")
             filtro_provincia = st.selectbox("Seleccioná la provincia", listado_provincias)
             
-            bloque = data["Bloque"].unique().tolist()
-            bloque.sort()
-            bloque.insert(0,"Todos")
-            bloque_seleccionado = st.selectbox("Seleccioná el bloque", bloque)
             if filtro_provincia != "-":
+                data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
+                bloque = data["Bloque"].unique().tolist()
+                bloque.sort()
+                bloque.insert(0,"Todos")
+                bloque_seleccionado = st.selectbox("Seleccioná el bloque", bloque)
                 if bloque_seleccionado == "Todos":
-                    data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
                     # Crear una lista de contenedores para imágenes y texto asociado
                     # Crear una lista de contenedores para imágenes y texto asociado
                     for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
@@ -117,7 +117,6 @@ def pagina_gobierno_nacional():
                             )
                 else:
                     data = data[data["Bloque"].str.contains(bloque_seleccionado, na= False, case= False)]
-                    data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
                     # Crear una lista de contenedores para imágenes y texto asociado
                     # Crear una lista de contenedores para imágenes y texto asociado
                     for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
