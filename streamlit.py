@@ -59,10 +59,7 @@ def pagina_gobierno_nacional():
         
                 # Mostrar la imagen en la primera columna
                 col_imagen.image("imgs/javier_milei.png")
-                col_texto.write(f"**{texto1}**")
-                col_texto.write(f"{texto2}")
-                col_texto.write(f"{texto3}")
-                col_texto.write(f"{texto4}")
+                col_texto.write(f"**{texto1}**\n{texto2}\n{texto3}\n{texto4}")
 
 def pagina_gobiernos_provinciales():
     hojas_provincial = nombre_hojas[15:]
