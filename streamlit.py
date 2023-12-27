@@ -44,8 +44,8 @@ def pagina_gobierno_nacional():
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional)
     st.session_state.estado['seleccion_desplegable'] = opcion_seleccionada
     if opcion_seleccionada != "-":
-        st.dataframe(data)
         data = hojas[opcion_seleccionada]
+        st.dataframe(data)
         try:
             data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
         except:
