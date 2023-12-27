@@ -55,15 +55,16 @@ def pagina_gobierno_nacional():
         for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL 1"] , data["TELEFONO1"]):
             with st.container(border=True):
                 # Crear columnas dentro del contenedor
-                col_imagen, col_texto = st.columns([1, 2])
+                col_imagen, col_texto = st.columns([0.5, 2.5])
         
                 # Mostrar la imagen en la primera columna
                 col_imagen.image("imgs/javier_milei.png")
                 # Aplica estilo solo a la columna de texto
                 # Aplica estilo solo a la columna de texto
                 # Aplica estilo solo a la columna de texto
+                # Aplica estilo solo a la columna de texto
                 col_texto.markdown(
-                    f"<div style='line-height: 1.5; font-size: 16px; margin-left: -20px;'>"
+                    f"<div style='line-height: 1.5; font-size: 16px;'>"
                     f"<strong>{texto1}</strong><br>{texto2}<br>{texto3}<br>{texto4}"
                     "</div>",
                     unsafe_allow_html=True
