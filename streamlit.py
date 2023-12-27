@@ -90,10 +90,13 @@ def pagina_gobiernos_provinciales():
         
                 # Mostrar la imagen en la primera columna
                 col_imagen.image("imgs/javier_milei.png")
-                col_texto.write(f"**{texto1}**")
-                col_texto.write(f"{texto2}")
-                col_texto.write(f"{texto3}")
-                col_texto.write(f"{texto4}")
+                # Aplica estilo solo a la columna de texto
+                col_texto.markdown(
+                    f"<div style='line-height: 1.5; font-size: 17px;'>"
+                    f"<strong>{texto1}</strong><br>{texto2}<br><a href='mailto:{texto3}'>{texto3}</a><br>{texto4}"
+                    "</div>",
+                    unsafe_allow_html=True
+                )
 
 
 
