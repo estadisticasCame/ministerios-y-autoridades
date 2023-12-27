@@ -94,14 +94,14 @@ def pagina_gobierno_nacional():
                 bloque.sort()
                 bloque.insert(0,"Todos")
                 bloque_seleccionado = st.selectbox("Seleccioná el bloque", bloque)
-                if st.checkbox("Buscar por apellido/nombre"):
-                    apellido_filtro = st.sidebar.text_input('Escriba aquí')
-                    data = data[data['CONCATENACION'].str.contains(apellido_filtro, case=False, na = False)]  
-                else:
-                    pass
+    
                 # PARA BUSCAR
                 if bloque_seleccionado == "Todos":
-                    # Crear una lista de contenedores para imágenes y texto asociado
+                    if st.checkbox("Buscar por apellido/nombre"):
+                        apellido_filtro = st.sidebar.text_input('Escriba aquí')
+                        data = data[data['CONCATENACION'].str.contains(apellido_filtro, case=False, na = False)]  
+                    else:
+                        pass
                     # Crear una lista de contenedores para imágenes y texto asociado
                     for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
                         # Reemplazar valores nulos con "-"
