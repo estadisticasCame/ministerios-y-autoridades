@@ -111,8 +111,11 @@ def pagina_gobierno_nacional():
                             # Crear columnas dentro del contenedor
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
-                            # Mostrar la imagen en la primera columna
-                            col_imagen.image("imgs/javier_milei.png")
+                            try:
+                                # Mostrar la imagen en la primera columna
+                                col_imagen.image("imgs/javier_milei.png")
+                            except:
+                                col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
                             col_texto.markdown(
                                 f"<div style='line-height: 1.5; font-size: 17px;'>"
@@ -134,8 +137,11 @@ def pagina_gobierno_nacional():
                             # Crear columnas dentro del contenedor
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
-                            # Mostrar la imagen en la primera columna
-                            col_imagen.image("imgs/javier_milei.png")
+                            try:
+                                # Mostrar la imagen en la primera columna
+                                col_imagen.image("imgs/javier_milei.png")
+                            except:
+                                col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
                             col_texto.markdown(
                                 f"<div style='line-height: 1.5; font-size: 17px;'>"
@@ -147,6 +153,7 @@ def pagina_gobierno_nacional():
             else:
                 data = data[data["Provincia"].str.contains(filtro_provincia, na= False, case= False)]
                 bloque = data["Bloque"].unique().tolist()
+                bloque = [str(elemento) for elemento in bloque]
                 bloque.sort()
                 bloque.insert(0,"Todos")
                 bloque_seleccionado = st.selectbox("Seleccioná el bloque", bloque)
@@ -168,8 +175,11 @@ def pagina_gobierno_nacional():
                             # Crear columnas dentro del contenedor
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
-                            # Mostrar la imagen en la primera columna
-                            col_imagen.image("imgs/javier_milei.png")
+                            try:
+                                # Mostrar la imagen en la primera columna
+                                col_imagen.image("imgs/javier_milei.png")
+                            except:
+                                col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
                             col_texto.markdown(
                                 f"<div style='line-height: 1.5; font-size: 17px;'>"
@@ -191,8 +201,11 @@ def pagina_gobierno_nacional():
                             # Crear columnas dentro del contenedor
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
-                            # Mostrar la imagen en la primera columna
-                            col_imagen.image("imgs/javier_milei.png")
+                            try:
+                                # Mostrar la imagen en la primera columna
+                                col_imagen.image("imgs/javier_milei.png")
+                            except:
+                                col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
                             col_texto.markdown(
                                 f"<div style='line-height: 1.5; font-size: 17px;'>"
@@ -223,11 +236,11 @@ def pagina_gobierno_nacional():
                 with st.container(border=True):
                     # Crear columnas dentro del contenedor
                     col_imagen, col_texto = st.columns([0.7, 2.3])
-            
-                    # Mostrar la imagen en la primera columna
-                    col_imagen.image("imgs/javier_milei.png")
-                    # Aplica estilo solo a la columna de texto
-                    # Aplica estilo solo a la columna de texto
+                    try:
+                        # Mostrar la imagen en la primera columna
+                        col_imagen.image("imgs/javier_milei.png")
+                    except:
+                        col_imagen.image("imgs/persona no encontrada.png")
                     # Aplica estilo solo a la columna de texto
                     col_texto.markdown(
                         f"<div style='line-height: 1.5; font-size: 17px;'>"
