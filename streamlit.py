@@ -64,6 +64,10 @@ def cargar_datos_excel():
             # Elimina la primera fila, ya que ahora son nombres de columnas
             hojas[nombre_hoja] = hojas[nombre_hoja][1:]
             for i, imagen5 in enumerate(hojas[nombre_hoja]["URL IMAGEN"]):
+                if "github" in imagen5 :
+                    imagen5 ="https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:] 
+                else:
+                    pass
                 try:
                     imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
                     # Guardar la imagen preprocesada en el DataFrame
@@ -138,9 +142,7 @@ def pagina_gobierno_nacional():
                             # Crear columnas dentro del contenedor
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                             
-                            try:
-                                
-                              
+                            try:  
                                 col_imagen.image(imagen5)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
@@ -155,7 +157,7 @@ def pagina_gobierno_nacional():
                     data = data[data["Bloque"].str.contains(bloque_seleccionado, na= False, case= False)]
                     # Crear una lista de contenedores para imágenes y texto asociado
                     # Crear una lista de contenedores para imágenes y texto asociado
-                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["URL IMAGEN"]):
+                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["IMAGEN_PREPROCESADA"]):
                         # Reemplazar valores nulos con "-"
                         texto1 = texto1 if not pd.isna(texto1) else "-"
                         texto2 = texto2 if not pd.isna(texto2) else "-"
@@ -166,8 +168,7 @@ def pagina_gobierno_nacional():
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
                             try:
-                                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
-                                # Mostrar la imagen en la primera columna
+                        
                                 col_imagen.image(imagen)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
@@ -194,7 +195,7 @@ def pagina_gobierno_nacional():
                 # PARA BUSCAR
                 if bloque_seleccionado == "Todos":
                     # Crear una lista de contenedores para imágenes y texto asociado
-                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["URL IMAGEN"]):
+                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["IMAGEN_PREPROCESADA"]):
                         # Reemplazar valores nulos con "-"
                         texto1 = texto1 if not pd.isna(texto1) else "-"
                         texto2 = texto2 if not pd.isna(texto2) else "-"
@@ -205,7 +206,7 @@ def pagina_gobierno_nacional():
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
                             try:
-                                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
+                             
                                 # Mostrar la imagen en la primera columna
                                 col_imagen.image(imagen)
                             except:
@@ -221,7 +222,7 @@ def pagina_gobierno_nacional():
                     data = data[data["Bloque"].str.contains(bloque_seleccionado, na= False, case= False)]
                     # Crear una lista de contenedores para imágenes y texto asociado
                     # Crear una lista de contenedores para imágenes y texto asociado
-                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["URL IMAGEN"]):
+                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["IMAGEN_PREPROCESADA"]):
                         # Reemplazar valores nulos con "-"
                         texto1 = texto1 if not pd.isna(texto1) else "-"
                         texto2 = texto2 if not pd.isna(texto2) else "-"
@@ -232,7 +233,7 @@ def pagina_gobierno_nacional():
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
                             try:
-                                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
+                     
                                 # Mostrar la imagen en la primera columna
                                 col_imagen.image(imagen)
                             except:
@@ -258,19 +259,18 @@ def pagina_gobierno_nacional():
             else:
                 pass   
             # Crear una lista de contenedores para imágenes y texto asociado
-            for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"], data["URL IMAGEN"]):
+            for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"], data["IMAGEN_PREPROCESADA"]):
                 # Reemplazar valores nulos con "-"
                 texto1 = texto1 if not pd.isna(texto1) else "-"
                 texto2 = texto2 if not pd.isna(texto2) else "-"
                 texto3 = texto3 if not pd.isna(texto3) else "-"
                 texto4 = texto4 if not pd.isna(texto4) else "-"
-                if "github" in imagen5 :
-                    imagen5 ="https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:] 
+        
                 with st.container(border=True):
                     # Crear columnas dentro del contenedor
                     col_imagen, col_texto = st.columns([0.7, 2.3])
                     try:
-                        imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
+                        
                                 # Mostrar la imagen en la primera columna
                         col_imagen.image(imagen)
                     except:
