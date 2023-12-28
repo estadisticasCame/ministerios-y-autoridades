@@ -8,6 +8,24 @@ import io
 import github
 import pandas as pd
 import streamlit as st
+import requests
+from PIL import Image, ImageDraw, ImageOps
+from io import BytesIO
+
+def cargar_y_redimensionar_imagen_desde_url(url, size=(100, 100)):
+    response = requests.get(url)
+    imagen = Image.open(BytesIO(response.content))
+    # Redimensionar la imagen
+    imagen.thumbnail(size)
+    # Crear una máscara circular con fondo transparente
+    mascara_circular = Image.new("L", size, 0)
+    draw = ImageDraw.Draw(mascara_circular)
+    draw.ellipse((0, 0, size[0], size[1]), fill=255)
+    # Crear una imagen con fondo transparente
+    imagen_redonda = Image.new("RGBA", size, (0, 0, 0, 0))
+    # Pegar la imagen redimensionada en la imagen con fondo transparente usando la máscara
+    imagen_redonda.paste(imagen, mask=mascara_circular)
+    return imagen_redonda
 
 columna1, columna2 = st.columns([2,1])
 with columna1:
@@ -102,7 +120,7 @@ def pagina_gobierno_nacional():
                 # PARA BUSCAR
                 if bloque_seleccionado == "Todos":
                     # Crear una lista de contenedores para imágenes y texto asociado
-                    for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
+                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["URL IMAGEN"]):
                         # Reemplazar valores nulos con "-"
                         texto1 = texto1 if not pd.isna(texto1) else "-"
                         texto2 = texto2 if not pd.isna(texto2) else "-"
@@ -113,8 +131,9 @@ def pagina_gobierno_nacional():
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
                             try:
+                                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
                                 # Mostrar la imagen en la primera columna
-                                col_imagen.image("imgs/javier_milei.png")
+                                col_imagen.image(imagen)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
@@ -128,7 +147,7 @@ def pagina_gobierno_nacional():
                     data = data[data["Bloque"].str.contains(bloque_seleccionado, na= False, case= False)]
                     # Crear una lista de contenedores para imágenes y texto asociado
                     # Crear una lista de contenedores para imágenes y texto asociado
-                    for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
+                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["URL IMAGEN"]):
                         # Reemplazar valores nulos con "-"
                         texto1 = texto1 if not pd.isna(texto1) else "-"
                         texto2 = texto2 if not pd.isna(texto2) else "-"
@@ -139,8 +158,9 @@ def pagina_gobierno_nacional():
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
                             try:
+                                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
                                 # Mostrar la imagen en la primera columna
-                                col_imagen.image("imgs/javier_milei.png")
+                                col_imagen.image(imagen)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
@@ -166,7 +186,7 @@ def pagina_gobierno_nacional():
                 # PARA BUSCAR
                 if bloque_seleccionado == "Todos":
                     # Crear una lista de contenedores para imágenes y texto asociado
-                    for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
+                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["URL IMAGEN"]):
                         # Reemplazar valores nulos con "-"
                         texto1 = texto1 if not pd.isna(texto1) else "-"
                         texto2 = texto2 if not pd.isna(texto2) else "-"
@@ -177,8 +197,9 @@ def pagina_gobierno_nacional():
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
                             try:
+                                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
                                 # Mostrar la imagen en la primera columna
-                                col_imagen.image("imgs/javier_milei.png")
+                                col_imagen.image(imagen)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
@@ -192,7 +213,7 @@ def pagina_gobierno_nacional():
                     data = data[data["Bloque"].str.contains(bloque_seleccionado, na= False, case= False)]
                     # Crear una lista de contenedores para imágenes y texto asociado
                     # Crear una lista de contenedores para imágenes y texto asociado
-                    for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"]):
+                    for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["Email"] , data["Telefono"], data["MANDATO"], data["URL IMAGEN"]):
                         # Reemplazar valores nulos con "-"
                         texto1 = texto1 if not pd.isna(texto1) else "-"
                         texto2 = texto2 if not pd.isna(texto2) else "-"
@@ -203,8 +224,9 @@ def pagina_gobierno_nacional():
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
                             try:
+                                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
                                 # Mostrar la imagen en la primera columna
-                                col_imagen.image("imgs/javier_milei.png")
+                                col_imagen.image(imagen)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
@@ -228,7 +250,7 @@ def pagina_gobierno_nacional():
             else:
                 pass   
             # Crear una lista de contenedores para imágenes y texto asociado
-            for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"]):
+            for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"], data["URL IMAGEN"]):
                 # Reemplazar valores nulos con "-"
                 texto1 = texto1 if not pd.isna(texto1) else "-"
                 texto2 = texto2 if not pd.isna(texto2) else "-"
@@ -238,8 +260,9 @@ def pagina_gobierno_nacional():
                     # Crear columnas dentro del contenedor
                     col_imagen, col_texto = st.columns([0.7, 2.3])
                     try:
-                        # Mostrar la imagen en la primera columna
-                        col_imagen.image("imgs/javier_milei.png")
+                        imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
+                                # Mostrar la imagen en la primera columna
+                        col_imagen.image(imagen)
                     except:
                         col_imagen.image("imgs/persona no encontrada.png")
                     # Aplica estilo solo a la columna de texto
