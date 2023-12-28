@@ -96,8 +96,8 @@ def pagina_gobierno_nacional():
                 if st.checkbox("Buscar por apellido/nombre"):
                         apellido_filtro = st.sidebar.text_input('Escriba aquí')
                         data = data[data['CONCATENACION'].str.contains(apellido_filtro, case=False, na = False)]  
-                    else:
-                        pass
+                else:
+                    pass
                 # PARA BUSCAR
                 if bloque_seleccionado == "Todos":
                     # Crear una lista de contenedores para imágenes y texto asociado
@@ -153,8 +153,8 @@ def pagina_gobierno_nacional():
                 if st.checkbox("Buscar por apellido/nombre"):
                         apellido_filtro = st.sidebar.text_input('Escriba aquí')
                         data = data[data['CONCATENACION'].str.contains(apellido_filtro, case=False, na = False)]  
-                    else:
-                        pass
+                else:
+                    pass
                 # PARA BUSCAR
                 if bloque_seleccionado == "Todos":
                     # Crear una lista de contenedores para imágenes y texto asociado
