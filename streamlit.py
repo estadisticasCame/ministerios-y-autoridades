@@ -55,23 +55,13 @@ def cargar_datos_excel():
             hojas[nombre_hoja] = hojas[nombre_hoja][1:]
             hojas[nombre_hoja]["IMAGEN_PREPROCESADA"] = pd.Series([])
             hojas[nombre_hoja] = hojas[nombre_hoja].reset_index(drop=True)
-            hojas[nombre_hoja].fillna("", inplace=True)
             for i, imagen5 in enumerate(hojas[nombre_hoja]["URL IMAGEN"]):
-                if pd.isna(imagen5):  # Verifica si el valor es NaN
-                # Si es NaN, asigna None y continúa con la siguiente iteración
-                    hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = None
-                    continue
-            
                 if "github" in imagen5:
                     imagen5 = "https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:]
+                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
+                # Guardar la imagen preprocesada en el DataFrame
+                hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = imagen
                 
-                try:
-                    imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
-                    # Guardar la imagen preprocesada en el DataFrame
-                    hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = imagen
-                except:
-                    # Si hay una excepción, asigna None a esa fila
-                    hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = None
                     
         except:
                 pass
