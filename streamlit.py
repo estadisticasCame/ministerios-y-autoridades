@@ -63,6 +63,7 @@ def cargar_datos_excel():
             hojas[nombre_hoja].columns = hojas[nombre_hoja].iloc[0]
             # Elimina la primera fila, ya que ahora son nombres de columnas
             hojas[nombre_hoja] = hojas[nombre_hoja][1:]
+            hojas[nombre_hoja]["IMAGEN_PREPROCESADA"] = None
             for i, imagen5 in enumerate(hojas[nombre_hoja]["URL IMAGEN"]):
                 if "github" in imagen5 :
                     imagen5 ="https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:] 
@@ -71,9 +72,10 @@ def cargar_datos_excel():
                 try:
                     imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
                     # Guardar la imagen preprocesada en el DataFrame
-                    hojas[nombre_hoja].at[i, "IMAGEN_PREPROCESADA"] = imagen
+                    hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = imagen
                 except:
-                        pass  
+                    hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = None
+                  
         except:
             pass
     return hojas,nombre_hojas
