@@ -12,20 +12,10 @@ import requests
 from PIL import Image, ImageDraw, ImageOps
 from io import BytesIO
 
-def cargar_y_redimensionar_imagen_desde_url(url, size=(100, 100)):
+def cargar_y_redimensionar_imagen_desde_url(url):
     response = requests.get(url)
     imagen = Image.open(BytesIO(response.content))
-    # Redimensionar la imagen
-    imagen.thumbnail(size)
-    # Crear una máscara circular con fondo transparente
-    mascara_circular = Image.new("L", size, 0)
-    draw = ImageDraw.Draw(mascara_circular)
-    draw.ellipse((0, 0, size[0], size[1]), fill=255)
-    # Crear una imagen con fondo transparente
-    imagen_redonda = Image.new("RGBA", size, (0, 0, 0, 0))
-    # Pegar la imagen redimensionada en la imagen con fondo transparente usando la máscara
-    imagen_redonda.paste(imagen, mask=mascara_circular)
-    return imagen_redonda
+    return imagen
 
 columna1, columna2 = st.columns([2,1])
 with columna1:
@@ -129,7 +119,7 @@ def pagina_gobierno_nacional():
                         with st.container(border=True):
                             # Crear columnas dentro del contenedor
                             col_imagen, col_texto = st.columns([0.7, 2.3])
-                    
+                            
                             try:
                                 imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
                                 # Mostrar la imagen en la primera columna
@@ -256,6 +246,8 @@ def pagina_gobierno_nacional():
                 texto2 = texto2 if not pd.isna(texto2) else "-"
                 texto3 = texto3 if not pd.isna(texto3) else "-"
                 texto4 = texto4 if not pd.isna(texto4) else "-"
+                if "github" in imagen5 :
+                    imagen5 = imagen5[18:] + "https://raw.githubusercontent.com"
                 with st.container(border=True):
                     # Crear columnas dentro del contenedor
                     col_imagen, col_texto = st.columns([0.7, 2.3])
