@@ -247,7 +247,7 @@ def pagina_gobierno_nacional():
                 texto3 = texto3 if not pd.isna(texto3) else "-"
                 texto4 = texto4 if not pd.isna(texto4) else "-"
                 if "github" in imagen5 :
-                    imagen5 ="https://raw.githubusercontent.com" + imagen5[18:] 
+                    imagen5 ="https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:] 
                 with st.container(border=True):
                     # Crear columnas dentro del contenedor
                     col_imagen, col_texto = st.columns([0.7, 2.3])
