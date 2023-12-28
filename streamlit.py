@@ -56,6 +56,7 @@ def cargar_datos_excel():
             hojas[nombre_hoja]["IMAGEN_PREPROCESADA"] = pd.Series([])
             hojas[nombre_hoja] = hojas[nombre_hoja].reset_index(drop=True)
             for i, imagen5 in enumerate(hojas[nombre_hoja]["URL IMAGEN"]):
+                print(i,imagen5)
                 if "github" in imagen5:
                     imagen5 = "https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:]
                 imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
