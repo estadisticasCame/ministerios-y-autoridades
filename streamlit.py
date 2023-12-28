@@ -109,7 +109,7 @@ def pagina_gobierno_nacional():
                 pass
               
             listado_provincias = data["Provincia"].unique().tolist()
-            bloque = [str(elemento) for elemento in bloque]
+            listado_provincias = [str(elemento) for elemento in bloque]
             listado_provincias.sort()
             listado_provincias.insert(0,"Todos")
             filtro_provincia = st.selectbox("Seleccioná la provincia", listado_provincias)
