@@ -123,7 +123,7 @@ def pagina_gobierno_nacional():
                             try:
                                 imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
                                 # Mostrar la imagen en la primera columna
-                                col_imagen.image(imagen, width=100, height=100)
+                                col_imagen.image(imagen, width=100)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
