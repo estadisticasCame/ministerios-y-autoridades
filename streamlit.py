@@ -69,7 +69,7 @@ def cargar_datos_excel():
                     # Guardar la imagen preprocesada en el DataFrame
                     hojas[nombre_hoja].at[i, "IMAGEN_PREPROCESADA"] = imagen
                 except:
-        pass  
+                        pass  
         except:
             pass
     return hojas,nombre_hojas
