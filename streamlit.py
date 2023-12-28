@@ -54,8 +54,9 @@ def cargar_datos_excel():
             # Elimina la primera fila, ya que ahora son nombres de columnas
             hojas[nombre_hoja] = hojas[nombre_hoja][1:]
             hojas[nombre_hoja]["IMAGEN_PREPROCESADA"] = None
-            hojas[nombre_hoja] = hojas[nombre_hoja].copy()
+            hojas[nombre_hoja] = hojas[nombre_hoja].reset_index(drop=True)
             for i, imagen5 in enumerate(hojas[nombre_hoja]["URL IMAGEN"]):
+                print(i, imagen5)
                 if "github" in imagen5 :
                     imagen5 ="https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:] 
                 else:
