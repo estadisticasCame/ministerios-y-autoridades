@@ -55,6 +55,7 @@ def cargar_datos_excel():
             hojas[nombre_hoja] = hojas[nombre_hoja][1:]
             hojas[nombre_hoja]["IMAGEN_PREPROCESADA"] = pd.Series([])
             hojas[nombre_hoja] = hojas[nombre_hoja].reset_index(drop=True)
+            hojas[nombre_hoja].fillna("", inplace=True)
             for i, imagen5 in enumerate(hojas[nombre_hoja]["URL IMAGEN"]):
                 print(i, imagen5)
                 if "github" in imagen5 :
@@ -66,8 +67,7 @@ def cargar_datos_excel():
                     # Guardar la imagen preprocesada en el DataFrame
                     hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = imagen
                 except:
-                    hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = None
-                  
+                    pass
         except:
             pass
     return hojas,nombre_hojas
