@@ -15,7 +15,7 @@ from io import BytesIO
 def cargar_y_redimensionar_imagen_desde_url(url, size=(100, 100)):
     response = requests.get(url)
     imagen = Image.open(BytesIO(response.content))
-    return imagen_redonda
+    return imagen
     
 columna1, columna2 = st.columns([2,1])
 with columna1:
