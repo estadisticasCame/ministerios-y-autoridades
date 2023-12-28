@@ -15,16 +15,6 @@ from io import BytesIO
 def cargar_y_redimensionar_imagen_desde_url(url, size=(100, 100)):
     response = requests.get(url)
     imagen = Image.open(BytesIO(response.content))
-    # Redimensionar la imagen
-    imagen.thumbnail(size)
-    # Crear una máscara circular con fondo transparente
-    mascara_circular = Image.new("L", size, 0)
-    draw = ImageDraw.Draw(mascara_circular)
-    draw.ellipse((0, 0, size[0], size[1]), fill=255)
-    # Crear una imagen con fondo transparente
-    imagen_redonda = Image.new("RGBA", size, (0, 0, 0, 0))
-    # Pegar la imagen redimensionada en la imagen con fondo transparente usando la máscara
-    imagen_redonda.paste(imagen, mask=mascara_circular)
     return imagen_redonda
     
 columna1, columna2 = st.columns([2,1])
