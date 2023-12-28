@@ -62,17 +62,17 @@ def cargar_datos_excel():
                     hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = None
                     continue
             
-            if "github" in imagen5:
-                imagen5 = "https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:]
-            
-            try:
-                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
-                # Guardar la imagen preprocesada en el DataFrame
-                hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = imagen
-            except:
-                # Si hay una excepción, asigna None a esa fila
-                hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = None
-                continue
+                if "github" in imagen5:
+                    imagen5 = "https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:]
+                
+                try:
+                    imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
+                    # Guardar la imagen preprocesada en el DataFrame
+                    hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = imagen
+                except:
+                    # Si hay una excepción, asigna None a esa fila
+                    hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = None
+                    
         except:
                 pass
     return hojas,nombre_hojas
