@@ -90,6 +90,7 @@ def pagina_gobierno_nacional():
             
             if filtro_provincia == "Todos":
                 bloque = data["Bloque"].unique().tolist()
+                bloque = [str(elemento) for elemento in bloque]
                 bloque.sort()
                 bloque.insert(0,"Todos")
                 bloque_seleccionado = st.selectbox("Seleccioná el bloque", bloque)
