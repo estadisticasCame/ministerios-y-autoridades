@@ -162,7 +162,7 @@ def pagina_gobierno_nacional():
                     
                             try:
                         
-                                col_imagen.image(imagen)
+                                col_imagen.image(imagen5)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
@@ -201,7 +201,7 @@ def pagina_gobierno_nacional():
                             try:
                              
                                 # Mostrar la imagen en la primera columna
-                                col_imagen.image(imagen)
+                                col_imagen.image(imagen5)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
@@ -228,7 +228,7 @@ def pagina_gobierno_nacional():
                             try:
                      
                                 # Mostrar la imagen en la primera columna
-                                col_imagen.image(imagen)
+                                col_imagen.image(imagen5)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
                             # Aplica estilo solo a la columna de texto
@@ -265,7 +265,7 @@ def pagina_gobierno_nacional():
                     try:
                         
                                 # Mostrar la imagen en la primera columna
-                        col_imagen.image(imagen)
+                        col_imagen.image(imagen5)
                     except:
                         col_imagen.image("imgs/persona no encontrada.png")
                     # Aplica estilo solo a la columna de texto
