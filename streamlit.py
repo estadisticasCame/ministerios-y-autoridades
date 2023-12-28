@@ -12,7 +12,7 @@ import requests
 from PIL import Image, ImageDraw, ImageOps
 from io import BytesIO
 
-def cargar_y_redimensionar_imagen_desde_url(url, size=(100, 100)):
+def cargar_y_redimensionar_imagen_desde_url(url):
     response = requests.get(url)
     imagen = Image.open(BytesIO(response.content))
     return imagen
@@ -53,7 +53,7 @@ def cargar_datos_excel():
             hojas[nombre_hoja].columns = hojas[nombre_hoja].iloc[0]
             # Elimina la primera fila, ya que ahora son nombres de columnas
             hojas[nombre_hoja] = hojas[nombre_hoja][1:]
-            hojas[nombre_hoja]["IMAGEN_PREPROCESADA"] = None
+            hojas[nombre_hoja]["IMAGEN_PREPROCESADA"] = pd.Series([])
             hojas[nombre_hoja] = hojas[nombre_hoja].reset_index(drop=True)
             for i, imagen5 in enumerate(hojas[nombre_hoja]["URL IMAGEN"]):
                 print(i, imagen5)
@@ -105,7 +105,8 @@ def pagina_gobierno_nacional():
                 )
             except:
                 pass
-              
+            st.dataframe(data)  
+            
             listado_provincias = data["Provincia"].unique().tolist()
             listado_provincias = [str(elemento) for elemento in listado_provincias]
             listado_provincias.sort()
