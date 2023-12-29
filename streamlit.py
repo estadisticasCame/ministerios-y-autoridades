@@ -27,8 +27,18 @@ with columna2:
 def cargar_datos_excel():
     conteo_imagenes = 0
     conteo_no_imagenes = 0
-    # Ingestamos el archivo de excel del meppi
-    excel = pd.read_excel("Datos/Ministerios y autoridades.xlsx", sheet_name=None)
+    github_token = st.secrets["TOKEN"] 
+    repo_name = st.secrets["REPO"]
+    file_path = st.secrets["ARCHIVO"]
+        
+    g = Github(github_token)
+    repo = g.get_repo(repo_name)
+    contents = repo.get_contents(file_path)
+    # Create a file-like object from the decoded content
+    content_bytes = contents.decoded_content
+    content_file = io.BytesIO(content_bytes)
+    # Read the CSV from the file-like object
+    excel = pd.read_excel(content_file, sheet_name=None)
     # Almacenamos las hojas en un diccionario de Pandas
     hojas = {}
     nombre_hojas = []
