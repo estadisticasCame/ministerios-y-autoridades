@@ -12,11 +12,6 @@ import requests
 from PIL import Image, ImageDraw, ImageOps
 from io import BytesIO
 
-def cargar_y_redimensionar_imagen_desde_url(url):
-    response = requests.get(url)
-    imagen = Image.open(BytesIO(response.content))
-    return imagen
-    
 columna1, columna2 = st.columns([2,1])
 with columna1:
     st.title("Tablero de control")
@@ -30,43 +25,71 @@ with columna2:
 # Realizamos la carga de datos y lo guardamos en cache de streamlit
 @st.cache_data
 def cargar_datos_excel():
-    # ACCEDEMOS A LOS DATOS EN TIEMPO REAL
-    github_token = st.secrets["TOKEN"] 
-    repo_name = st.secrets["REPO"]
-    file_path = st.secrets["ARCHIVO"]   
-        
-    g = Github(github_token)
-    repo = g.get_repo(repo_name)
-    contents = repo.get_contents(file_path)
-    # Create a file-like object from the decoded content
-    content_bytes = contents.decoded_content
-    content_file = io.BytesIO(content_bytes)
+    conteo_imagenes = 0
+    conteo_no_imagenes = 0
     # Ingestamos el archivo de excel del meppi
-    excel = pd.read_excel(content_file, sheet_name=None)
+    excel = pd.read_excel("Datos/Ministerios y autoridades.xlsx", sheet_name=None)
     # Almacenamos las hojas en un diccionario de Pandas
     hojas = {}
     nombre_hojas = []
     for nombre_hoja, datos_hoja in excel.items():
         hojas[nombre_hoja] = datos_hoja
         nombre_hojas.append(nombre_hoja)
+        df = hojas[nombre_hoja].copy()
         try:
-            hojas[nombre_hoja].columns = hojas[nombre_hoja].iloc[0]
+            df.columns = df.iloc[0]
             # Elimina la primera fila, ya que ahora son nombres de columnas
-            hojas[nombre_hoja] = hojas[nombre_hoja][1:]
-            hojas[nombre_hoja]["IMAGEN_PREPROCESADA"] = pd.Series([])
-            hojas[nombre_hoja] = hojas[nombre_hoja].reset_index(drop=True)
-            for i, imagen5 in enumerate(hojas[nombre_hoja]["URL IMAGEN"]):
-                print(i,imagen5)
+            df = df[1:]
+        except:
+            pass
+
+        if "URL IMAGEN" in df.columns :
+            df = df.copy()
+            df["IMAGEN_PREPROCESADA"] = None
+            df = df.reset_index(drop=True)
+            for i, imagen5 in enumerate(df["URL IMAGEN"]):
                 if "github" in imagen5:
                     imagen5 = "https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:]
-                imagen = cargar_y_redimensionar_imagen_desde_url(imagen5)
-                # Guardar la imagen preprocesada en el DataFrame
-                hojas[nombre_hoja].loc[i, "IMAGEN_PREPROCESADA"] = imagen
-                
+                else:
+                    pass    
+                response = requests.get(imagen5)
+                # Verificar si la descarga fue exitosa
+                if response.status_code == 200:
+                    try:
+                        # Intentar abrir la imagen con Pillow
+                        imagen = Image.open(BytesIO(response.content))
+                        # Redimensionar temporalmente a una resolución mayor
+                        resolucion_temporal = 500
+                        imagen_temporal = imagen.resize((resolucion_temporal, resolucion_temporal), Image.LANCZOS)
+
+                        # Crear una máscara para el efecto de redondeo en la resolución temporal
+                        mascara_temporal = Image.new('L', (resolucion_temporal, resolucion_temporal), 0)
+                        draw_temporal = ImageDraw.Draw(mascara_temporal)
+                        draw_temporal.ellipse((0, 0, resolucion_temporal, resolucion_temporal), fill=255)
+
+                        # Aplicar la máscara a la imagen redimensionada temporal
+                        imagen_temporal_redondeada = Image.new('RGBA', (resolucion_temporal, resolucion_temporal), (255, 255, 255, 0))
+                        imagen_temporal_redondeada.paste(imagen_temporal, mask=mascara_temporal)
+
+                        # Redimensionar nuevamente a 100x100 píxeles
+                        imagen_redondeada = imagen_temporal_redondeada.resize((100, 100), Image.LANCZOS)
+                        # Guardar la imagen preprocesada en la columna por su nombre
+                        df.loc[i, "IMAGEN_PREPROCESADA"] = imagen_redondeada
+                        conteo_imagenes +=1
+                    except Exception as e:
+                        conteo_no_imagenes += 1
+                       
+                else:
+                    conteo_no_imagenes += 1
                     
-        except:
-                pass
-    return hojas,nombre_hojas
+        else:
+            pass
+
+        hojas[nombre_hoja] = df
+
+    print(f"Imagenes exitosas {conteo_imagenes - conteo_no_imagenes} de {conteo_no_imagenes + conteo_imagenes}") 
+        
+    return hojas, nombre_hojas
 
 hojas, nombre_hojas = cargar_datos_excel()
 
@@ -78,7 +101,7 @@ if 'estado' not in st.session_state:
         'seleccion_desplegable': None
     }
 
-def pagina_gobierno_nacional():
+def pagina_gobierno_nacional(hojas,nombre_hojas):
     hojas_nacional = nombre_hojas[1:15]
     hojas_nacional.insert(0,"-")
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional)
@@ -158,8 +181,7 @@ def pagina_gobierno_nacional():
                             # Crear columnas dentro del contenedor
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
-                            try:
-                        
+                            try:                        
                                 col_imagen.image(imagen5)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
@@ -197,8 +219,6 @@ def pagina_gobierno_nacional():
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
                             try:
-                             
-                                # Mostrar la imagen en la primera columna
                                 col_imagen.image(imagen5)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
@@ -224,8 +244,6 @@ def pagina_gobierno_nacional():
                             col_imagen, col_texto = st.columns([0.7, 2.3])
                     
                             try:
-                     
-                                # Mostrar la imagen en la primera columna
                                 col_imagen.image(imagen5)
                             except:
                                 col_imagen.image("imgs/persona no encontrada.png")
@@ -236,8 +254,6 @@ def pagina_gobierno_nacional():
                                 "</div>",
                                 unsafe_allow_html=True
                             )
-                pass
-
         else:    
             try:
                 data["CONCATENACION"] = data["TRATAMIENTO"] + " " + data["NOMBRE"] + " " + data["APELLIDO"] 
@@ -261,8 +277,6 @@ def pagina_gobierno_nacional():
                     # Crear columnas dentro del contenedor
                     col_imagen, col_texto = st.columns([0.7, 2.3])
                     try:
-                        
-                                # Mostrar la imagen en la primera columna
                         col_imagen.image(imagen5)
                     except:
                         col_imagen.image("imgs/persona no encontrada.png")
@@ -274,7 +288,7 @@ def pagina_gobierno_nacional():
                         unsafe_allow_html=True
                     )
 
-def pagina_gobiernos_provinciales():
+def pagina_gobiernos_provinciales(hojas,nombre_hojas):
     hojas_provincial = nombre_hojas[15:]
     hojas_provincial.insert(0,"-")
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_provincial)
@@ -330,6 +344,6 @@ st.write("---")
 
 # Mostrar la página correspondiente según el botón seleccionado
 if st.session_state.estado['seleccion_boton'] == "gobierno_nacional":
-    pagina_gobierno_nacional()
+    pagina_gobierno_nacional(hojas,nombre_hojas)
 elif st.session_state.estado['seleccion_boton'] == "gobiernos_provinciales":
-    pagina_gobiernos_provinciales()
+    pagina_gobiernos_provinciales(hojas,nombre_hojas)
