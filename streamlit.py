@@ -12,6 +12,12 @@ import requests
 from PIL import Image, ImageDraw, ImageOps
 from io import BytesIO
 
+# Configuramos la página
+st.set_page_config(
+    page_title="Ministerios y autoridades 2024",
+    page_icon="imgs/CAME-Transparente.ico.ico",
+    )
+
 columna1, columna2 = st.columns([2,1])
 with columna1:
     st.title("Tablero de control")
