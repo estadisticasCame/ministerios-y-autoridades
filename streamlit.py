@@ -63,8 +63,10 @@ def cargar_datos_excel():
             df = df.copy()
             df["IMAGEN_PREPROCESADA"] = None
             df = df.reset_index(drop=True)
+            # Reemplazar los valores en la columna "URL IMAGEN" por nulos cuando sea necesario
+            condicion = df["URL IMAGEN"].isnull()  # Condición para identificar los registros nulos 
+            df.loc[condicion, "URL IMAGEN"] = "https://github.com/estadisticasCame/ministerios-y-autoridades/blob/main/imgs/persona%20no%20encontrada.png" 
             for i, imagen5 in enumerate(df["URL IMAGEN"]):
-                imagen5 = imagen5 if not pd.isna(imagen5) else "https://github.com/estadisticasCame/ministerios-y-autoridades/blob/main/imgs/persona%20no%20encontrada.png"
                 if "github" in imagen5:
                     imagen5 = "https://raw.githubusercontent.com/estadisticasCame/ministerios-y-autoridades/main/" + imagen5[72:]
                 else:
