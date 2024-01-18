@@ -60,6 +60,7 @@ def cargar_datos_excel():
             pass
 
         if "URL IMAGEN" in df.columns :
+            st.write(df.columns)
             df = df.copy()
             df["IMAGEN_PREPROCESADA"] = None
             df = df.reset_index(drop=True)
