@@ -283,7 +283,13 @@ def pagina_gobierno_nacional(hojas,nombre_hojas):
             else:
                 pass   
             # Crear una lista de contenedores para imágenes y texto asociado
-            for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"], data["IMAGEN_PREPROCESADA"]):
+            aux = ["ENTE", "COMISIÓN"]
+            if aux[1] in data.columns:
+                auxiliar = aux[1]
+            else:
+                auxiliar = aux[0]
+                
+            for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data[auxiliar], data["EMAIL1"] , data["TELEFONO1"], data["IMAGEN_PREPROCESADA"]):
                 # Reemplazar valores nulos con "-"
                 texto1 = texto1 if not pd.isna(texto1) else "-"
                 texto2 = texto2 if not pd.isna(texto2) else "-"
