@@ -286,12 +286,12 @@ def pagina_gobierno_nacional(hojas,nombre_hojas):
             aux = ["ENTE", "COMISIÓN"]
             if aux[1] in data.columns:
                 auxiliar = aux[1]
-                comisiones = data[auxiliar].unique().tolist()
-                comisiones = [str(elemento) for elemento in comisiones]
-                comisiones.sort()
-                comisiones.insert(0,"Todos")
-                comision_seleccionada = st.selectbox("Seleccioná la comisión", comisiones)
-                data = data[data[auxiliar].str.contains(comision_seleccionada, na= False, case= False)]
+                if st.checkbox("Filtrar por comisión"):
+                    comisiones = data[auxiliar].unique().tolist()
+                    comisiones = [str(elemento) for elemento in comisiones]
+                    comisiones.sort()
+                    comision_seleccionada = st.selectbox("Seleccioná la comisión", comisiones)
+                    data = data[data[auxiliar].str.contains(comision_seleccionada, na= False, case= False)]
             else:
                 auxiliar = aux[0]
                 
