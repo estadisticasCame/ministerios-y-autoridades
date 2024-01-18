@@ -122,7 +122,7 @@ if 'estado' not in st.session_state:
     }
 
 def pagina_gobierno_nacional(hojas,nombre_hojas):
-    hojas_nacional = nombre_hojas[1:16]
+    hojas_nacional = nombre_hojas[1:17]
     hojas_nacional.insert(0,"-")
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_nacional)
     st.write("---")
@@ -312,7 +312,7 @@ def pagina_gobierno_nacional(hojas,nombre_hojas):
                     )
 
 def pagina_gobiernos_provinciales(hojas,nombre_hojas):
-    hojas_provincial = nombre_hojas[15:]
+    hojas_provincial = nombre_hojas[17:]
     hojas_provincial.insert(0,"-")
     opcion_seleccionada = st.selectbox("Seleccioná una opción", hojas_provincial)
     st.write("---")
