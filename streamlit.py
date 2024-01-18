@@ -63,6 +63,7 @@ def cargar_datos_excel():
             df = df.copy()
             df["IMAGEN_PREPROCESADA"] = None
             df = df.reset_index(drop=True)
+            st.dataframe(df["URL IMAGEN"])
             try:
                 for i, imagen5 in enumerate(df["URL IMAGEN"]):
                     imagen5 = imagen5 if not pd.isna(imagen5) else "https://github.com/estadisticasCame/ministerios-y-autoridades/blob/main/imgs/persona%20no%20encontrada.png"
