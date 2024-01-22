@@ -346,7 +346,7 @@ def pagina_gobiernos_provinciales(hojas,nombre_hojas):
                 col_imagen, col_texto = st.columns([0.7, 2.3])
         
                 # Mostrar la imagen en la primera columna
-                col_imagen.image("imgs/javier_milei.png")
+                col_imagen.image("imgs/persona no encontrada.png")
                 # Aplica estilo solo a la columna de texto
                 col_texto.markdown(
                     f"<div style='line-height: 1.5; font-size: 17px;'>"
