@@ -335,7 +335,7 @@ def pagina_gobiernos_provinciales(hojas,nombre_hojas):
             data = data[data['CONCATENACION'].str.contains(apellido_filtro, case=False, na = False)]  
         else:
             pass
-        for texto1, texto2, texto3, texto4 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"]):
+        for texto1, texto2, texto3, texto4, imagen5 in zip(data["CONCATENACION"], data["ENTE"], data["EMAIL1"] , data["TELEFONO1"],data["IMAGEN_PREPROCESADA"]):
             # Reemplazar valores nulos con "-"
             texto1 = texto1 if not pd.isna(texto1) else "-"
             texto2 = texto2 if not pd.isna(texto2) else "-"
@@ -344,9 +344,10 @@ def pagina_gobiernos_provinciales(hojas,nombre_hojas):
             with st.container(border=True):
                 # Crear columnas dentro del contenedor
                 col_imagen, col_texto = st.columns([0.7, 2.3])
-        
-                # Mostrar la imagen en la primera columna
-                col_imagen.image("imgs/persona no encontrada.png")
+                try:
+                    col_imagen.image(imagen5)
+                except:
+                    col_imagen.image("imgs/persona no encontrada.png")
                 # Aplica estilo solo a la columna de texto
                 col_texto.markdown(
                     f"<div style='line-height: 1.5; font-size: 17px;'>"
